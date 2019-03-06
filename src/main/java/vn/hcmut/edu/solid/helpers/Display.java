@@ -19,17 +19,6 @@ public class Display {
     }
 
     public void showList() throws IOException, DocumentException {
-//        String leftAlignFormat = "| %-20s | %-20s | %-60s | %-30s | %-30s | %-4s |%n";
-//
-//        System.out.format("+----------------------+----------------------+--------------------------------------------------------------+--------------------------------+--------------------------------+------+%n");
-//        System.out.format("| Front Cover          | Back Cover           | Title                                                        | Authors                        | Publisher                      | Year |%n");
-//        System.out.format("+----------------------+----------------------+--------------------------------------------------------------+--------------------------------+--------------------------------+------+%n");
-//        for (Book b : result) {
-//            Printer p = new Printer(b);
-//            System.out.format(leftAlignFormat, p.makeFrontCover(), p.makeBackCover(), b.getTitle(), b.getAuthors(), b.getPublisher(), b.getYear());
-//        }
-//        System.out.format("+----------------------+----------------------+--------------------------------------------------------------+--------------------------------+--------------------------------+------+%n");
-
         Document document = new Document();
 
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("SearchResult.pdf"));

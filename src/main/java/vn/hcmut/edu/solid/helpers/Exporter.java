@@ -1,24 +1,43 @@
 package vn.hcmut.edu.solid.helpers;
 
-import vn.hcmut.edu.solid.items.Book;
+import com.google.gson.Gson;
+import com.thoughtworks.xstream.XStream;
+import vn.hcmut.edu.solid.SearchResult;
 import vn.hcmut.edu.solid.items.LibItem;
 
-public abstract class Exporter {
-    private LibItem item;
+public class Exporter {
+    private SearchResult searchResult;
 
-    public Exporter(LibItem item) {
-        this.item = item;
+    public Exporter(SearchResult searchResult) {
+        this.searchResult = searchResult;
     }
 
-    public LibItem getItem() {
-        return item;
+    public String toJson() {
+        if (this.searchResult == null) {
+            return null;
+        }
+
+        return new Gson().toJson(this.searchResult.getList());
     }
 
-    public void setItem(Book item) {
-        this.item = item;
+    public String toXML() {
+        if (this.searchResult == null) {
+            return null;
+        }
+
+        XStream xstream = new XStream();
+        xstream.alias("Item", LibItem.class);
+        xstream.alias("Items", SearchResult.class);
+        xstream.addImplicitCollection(SearchResult.class, "list");
+
+        return xstream.toXML(searchResult);
     }
 
-    public abstract String toJson(int pageNum);
+    public SearchResult getSearchResult() {
+        return searchResult;
+    }
 
-    public abstract String toXML(int pageNum);
+    public void setSearchResult(SearchResult searchResult) {
+        this.searchResult = searchResult;
+    }
 }

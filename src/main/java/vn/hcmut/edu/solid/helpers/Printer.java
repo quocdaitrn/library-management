@@ -3,8 +3,8 @@ package vn.hcmut.edu.solid.helpers;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Image;
 import vn.hcmut.edu.solid.items.LibItem;
+
 import java.io.IOException;
-import java.net.URL;
 
 public class Printer {
     private LibItem item;
@@ -22,17 +22,19 @@ public class Printer {
     }
 
     public Image makeFrontCover() throws IOException, BadElementException {
-        String imageUrl = "https://isach.info/images/story/cover/toi_thay_hoa_vang_tren_co_xanh__nguyen_nhat_anh.jpg";
-        Image image = Image.getInstance(new URL(imageUrl));
-        image.scaleToFit(50, 60);
+        CoverGenerator generator = new CoverGenerator(item.getTitle());
+        String imageUrl = generator.generateFrontCover();
+        Image image = Image.getInstance(imageUrl);
+        image.scaleToFit(30, 40);
 
         return image;
     }
 
     public Image makeBackCover() throws IOException, BadElementException {
-        String imageUrl = "https://isach.info/images/story/cover/toi_thay_hoa_vang_tren_co_xanh__nguyen_nhat_anh.jpg";
-        Image image = Image.getInstance(new URL(imageUrl));
-        image.scaleToFit(50, 60);
+        CoverGenerator generator = new CoverGenerator(item.getTitle());
+        String imageUrl = generator.generateBackCover();
+        Image image = Image.getInstance(imageUrl);
+        image.scaleToFit(30, 40);
 
         return image;
     }
