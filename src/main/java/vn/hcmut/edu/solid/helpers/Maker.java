@@ -1,36 +1,58 @@
 package vn.hcmut.edu.solid.helpers;
 
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Image;
+import vn.hcmut.edu.solid.items.LibItem;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class CoverGenerator {
-    private String title;
+public class Maker {
+    private LibItem item;
 
-    public CoverGenerator(String title) {
-        this.title = title;
+    public Maker(LibItem item) {
+        this.item = item;
     }
 
-    public String generateFrontCover() {
-        String pathName = this.title.replace(" ", "") + "_Front.png";
-        String[] text = this.title.split(" ");
-        return generateImageFromText(text[0], pathName);
+    public LibItem getItem() {
+        return item;
     }
 
-    public String generateBackCover() {
-        String pathName = this.title.replace(" ", "") + "_Back.png";
-        String[] text = this.title.split(" ");
-        return generateImageFromText(text[text.length - 1], pathName);
+    public void setItem(LibItem item) {
+        this.item = item;
     }
 
-    private String generateImageFromText(String text, String pathName) {
+    public Image makeFrontCover() throws IOException, BadElementException {
+        String pathName = this.item.getTitle().replace(" ", "") + "_Front.png";
+        String[] text = this.item.getTitle().split(" ");
+        String imageUrl = createImageFromText(text[0], pathName);
+
+        Image image = Image.getInstance(imageUrl);
+        image.scaleToFit(30, 40);
+
+        return image;
+    }
+
+    public Image makeBackCover() throws IOException, BadElementException {
+        String pathName = this.item.getTitle().replace(" ", "") + "_Back.png";
+        String[] text = this.item.getTitle().split(" ");
+        String imageUrl = createImageFromText(text[text.length - 1], pathName);
+
+        Image image = Image.getInstance(imageUrl);
+        image.scaleToFit(30, 40);
+
+        return image;
+    }
+
+    private String createImageFromText(String text, String pathName) {
         BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = img.createGraphics();
         Font font = new Font("Arial", Font.PLAIN, 48);
         g2d.setFont(font);
-        FontMetrics fm = g2d.getFontMetrics();
+        FontMetrics fm;
         int width = 40;
         int height = 60;
         g2d.dispose();
@@ -60,13 +82,5 @@ public class CoverGenerator {
         }
 
         return pathName;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 }

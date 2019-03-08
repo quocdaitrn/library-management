@@ -12,3 +12,7 @@ IgnoreLexer.java~
 .gradle
 
 /verification
+*.png
+*.jpg
+*.jpeg
+*.pdf

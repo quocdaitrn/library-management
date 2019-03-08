@@ -1,24 +1,25 @@
-package vn.hcmut.edu.solid.helpers;
+package vn.hcmut.edu.solid.printers;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import vn.hcmut.edu.solid.SearchResult;
+import vn.hcmut.edu.solid.helpers.Maker;
 import vn.hcmut.edu.solid.items.Book;
 import vn.hcmut.edu.solid.items.LibItem;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class Display {
-    private SearchResult searchResult;
+public class PDFPrinter extends Printer {
 
-    public Display(SearchResult searchResult) {
+    public PDFPrinter(SearchResult searchResult) {
         this.searchResult = searchResult;
     }
 
-    public void showList() throws IOException, DocumentException {
+    @Override
+    public void print() throws IOException, DocumentException {
         Document document = new Document();
 
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("SearchResult.pdf"));
@@ -48,9 +49,9 @@ public class Display {
         addRowToTable(table, frontCoverCellTitle, backCoverCellTitle, titleCellTitle, authorsCellTitle, publisherCellTitle, yearCellTitle);
 
         for (LibItem b : searchResult.getList()) {
-            Printer p = new Printer(b);
-            PdfPCell frontCoverCell = createPdfPCell(p.makeFrontCover(), false);
-            PdfPCell backCoverCell = createPdfPCell(p.makeBackCover(), false);
+            Maker maker = new Maker(b);
+            PdfPCell frontCoverCell = createPdfPCell(maker.makeFrontCover(), false);
+            PdfPCell backCoverCell = createPdfPCell(maker.makeBackCover(), false);
             PdfPCell titleCell = createPdfPCell(b.getTitle(), false);
             PdfPCell authorsCell;
             if (b instanceof Book) {
