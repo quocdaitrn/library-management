@@ -1,15 +1,13 @@
 package vn.hcmut.edu.solid.items;
 
-public class Book implements LibItem {
-    private String title;
+public class Book extends LibItem {
     private String authors;
-    private String publisher;
-    private String year;
+    private int year;
 
     public Book() {
     }
 
-    public Book(String title, String authors, String publisher, String year) {
+    public Book(String title, String authors, String publisher, int year) {
         this.title = title;
         this.authors = authors;
         this.publisher = publisher;
@@ -40,21 +38,17 @@ public class Book implements LibItem {
         this.publisher = publisher;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
     @Override
-    public String toString() {
-        return "Book{" +
-                "title='" + title + '\'' +
-                ", authors='" + authors + '\'' +
-                ", publisher='" + publisher + '\'' +
-                ", year='" + year + '\'' +
-                '}';
+    public String getInfo() {
+        return "Authors: " + this.authors + "\n\n"
+                + "Year: " + this.year;
     }
 }

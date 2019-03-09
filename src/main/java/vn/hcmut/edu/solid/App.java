@@ -11,14 +11,15 @@ import vn.hcmut.edu.solid.printers.PDFPrinter;
 import vn.hcmut.edu.solid.printers.Printer;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        LibItem book1 = new Book("Toi thay hoa vang tren co xanh", "Nguyen Nhat Anh", "Thanh nien", "2015");
-        LibItem book2 = new Book("Oxford thuong yeu", "Duong Thuy", "Van Hoa", "2010");
-        LibItem magazine1 = new Magazine("Muc tim", "Van Hoa", "2019");
+        LibItem book1 = new Book("Toi thay hoa vang tren co xanh", "Nguyen Nhat Anh", "Thanh nien", 2010);
+        LibItem book2 = new Book("Oxford thuong yeu", "Duong Thuy", "Van Hoa", 2009);
+        LibItem magazine1 = new Magazine("Muc tim", "Van Hoa", "October 2015");
 
         SearchResult searchResult = new SearchResult(Arrays.asList(book1, book2, magazine1));
         searchResult.sortBy(LibItem::getTitle);

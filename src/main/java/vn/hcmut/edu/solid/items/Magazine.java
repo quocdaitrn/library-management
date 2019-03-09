@@ -1,49 +1,27 @@
 package vn.hcmut.edu.solid.items;
 
-public class Magazine implements LibItem {
-    private String title;
-    private String publisher;
-    private String year;
+public class Magazine extends LibItem {
+    private String publishDate;
 
     public Magazine() {
     }
 
-    public Magazine(String title, String publisher, String year) {
+    public Magazine(String title, String publisher, String publishDate) {
         this.title = title;
         this.publisher = publisher;
-        this.year = year;
+        this.publishDate = publishDate;
     }
 
-    public String getTitle() {
-        return title;
+    public String getPublishDate() {
+        return publishDate;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
     }
 
     @Override
-    public String toString() {
-        return "Magazine{" +
-                "title='" + title + '\'' +
-                ", publisher='" + publisher + '\'' +
-                ", year='" + year + '\'' +
-                '}';
+    public String getInfo() {
+        return "Publish date: " + this.publishDate;
     }
 }
