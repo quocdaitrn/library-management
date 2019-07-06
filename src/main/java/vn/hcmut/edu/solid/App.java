@@ -11,17 +11,23 @@ import vn.hcmut.edu.solid.printers.PDFPrinter;
 import vn.hcmut.edu.solid.printers.Printer;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
+    private static List<LibItem> dummyItems;
+
+    static {
         LibItem book1 = new Book("Toi thay hoa vang tren co xanh", "Nguyen Nhat Anh", "Thanh nien", 2010);
         LibItem book2 = new Book("Oxford thuong yeu", "Duong Thuy", "Van Hoa", 2009);
         LibItem magazine1 = new Magazine("Muc tim", "Van Hoa", "October 2015");
 
-        SearchResult searchResult = new SearchResult(Arrays.asList(book1, book2, magazine1));
+        dummyItems = Arrays.asList(book1, book2, magazine1);
+    }
+
+    public static void main(String[] args) {
+        SearchResult searchResult = new SearchResult(dummyItems);
         searchResult.sortBy(LibItem::getTitle);
 
         System.out.println("Please choose mode to go:");
@@ -29,6 +35,7 @@ public class App {
         System.out.println("2. Export json");
         System.out.println("3. Export XML");
         Scanner scanner = new Scanner(System.in);
+
 
 
         int mode = scanner.nextInt();
